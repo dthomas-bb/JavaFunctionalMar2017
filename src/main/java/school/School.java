@@ -9,13 +9,13 @@ interface StudentCriterion {
     boolean test(Student s);
 }
 
-class SmartStudentCriterion implements StudentCriterion {
-
-    @Override
-    public boolean test(Student s) {
-        return s.getGpa() > 3.0F;
-    }
-}
+//class SmartStudentCriterion implements StudentCriterion {
+//
+//    @Override
+//    public boolean test(Student s) {
+//        return s.getGpa() > 3.0F;
+//    }
+//}
 
 public class School {
 
@@ -69,7 +69,11 @@ public class School {
 //        show(getSmartStudents(school, 2.8F));
 //        System.out.println("----------enthusiastic:---------");
 //        show(getEnthousiasticStudents(school, 3));
-        System.out.println("----------smart:---------");
-        show(getStudentsByCriterion(school, new SmartStudentCriterion()));
+        System.out.println("----------very smart:---------");
+        show(getStudentsByCriterion(school, Student.getSmartnessCriterion(3.6F)));
+        System.out.println("----------fairly smart:---------");
+        show(getStudentsByCriterion(school, Student.getSmartnessCriterion(3.0F)));
+        System.out.println("----------enthusiastic:---------");
+        show(getStudentsByCriterion(school, Student.getEnthusiasmCriterion(2)));
     }
 }

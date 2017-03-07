@@ -36,4 +36,40 @@ public class Student {
     public String toString() {
         return "Student{" + "name=" + name + ", gpa=" + gpa + ", courses=" + courses + '}';
     }
+
+    public static StudentCriterion getSmartnessCriterion(final float threshold) {
+//        float mythreshold = threshold - 0.4F;
+        return new StudentCriterion() {
+
+            @Override
+            public boolean test(Student s) {
+//                float yourthreshold = threshold +2;
+                return s.getGpa() > threshold;
+            }
+        };
+    }
+
+    public static StudentCriterion getEnthusiasmCriterion(int threshold) {
+        return new StudentCriterion() {
+
+            @Override
+            public boolean test(Student s) {
+                return s.getCourses().size() > threshold;
+            }
+        };
+    }
+
+//    private static StudentCriterion smartnessCriterion = new SmartStudentCriterion();
+//    
+//    public static StudentCriterion getSmartnessCriterion() {
+//        return smartnessCriterion;
+//    }
+//    
+//    private static class SmartStudentCriterion implements StudentCriterion {
+//
+//        @Override
+//        public boolean test(Student s) {
+//            return s.getGpa() > 3.0F;
+//        }
+//    }
 }
