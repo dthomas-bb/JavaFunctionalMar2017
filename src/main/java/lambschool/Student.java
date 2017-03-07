@@ -13,6 +13,10 @@ public class Student {
     private Student() {
     }
 
+    public int length() { // FAKED for lambda inference investigation!!!
+        return courses.size();
+    }
+    
     public static Student ofNameGpaCourses(String name, float gpa, String... courses) {
         Student self = new Student();
         self.name = name;
@@ -39,31 +43,24 @@ public class Student {
     }
 
     public static Criterion<Student> getSmartnessCriterion(final float threshold) {
-        return new Criterion<Student>() {
-
-            @Override
-            public boolean test(Student s) {
+        return (s) -> {
                 return s.getGpa() > threshold;
-            }
-        };
+            };
     }
 
     public static Criterion<Student> getEnthusiasmCriterion(int threshold) {
-        return new Criterion<Student>() {
-
-            @Override
-            public boolean test(Student s) {
-                return s.getCourses().size() > threshold;
-            }
-        };
+        return s -> s.getCourses().size() > threshold;
     }
 
     public static Comparator<Student> getGpaOrdering() {
-        return new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return Float.compare(o1.gpa, o2.gpa);
-            }
-        };
+        return (o1, o2) -> { return Float.compare(o1.gpa, o2.gpa);};
     }
+//    public static Comparator<Student> getGpaOrdering() {
+//        return /*new Comparator<Student>() {
+//            @Override
+//            public int compare*/(/*Student*/ o1, /*Student*/ o2) -> {
+//                return Float.compare(o1.gpa, o2.gpa);
+//            }
+//        /*}*/;
+//    }
 }

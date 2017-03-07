@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-interface Criterion<E> {
-
-    boolean test(E s);
-}
-
 class ShortStringCriterion implements Criterion<String> {
 
     @Override
@@ -18,8 +13,15 @@ class ShortStringCriterion implements Criterion<String> {
 
 }
 
+interface Weird<E> {
+    boolean doStuff(E e);
+}
+
 public class School {
 
+    public static <E> void doStuff(Criterion<E> ce) {}
+    public static <E> void doStuff(Weird<E> ce) {}
+    
     public static <E> List<E> getByCriterion(List<E> ls, Criterion<E> criterion) {
         List<E> rv = new ArrayList<>();
         for (E s : ls) {
@@ -60,7 +62,12 @@ public class School {
         List<String> strings = Arrays.asList("Fred", "Jim", "Orinoco", "Aeroplane");
         show(strings);
         System.out.println("------------ short strings ------------------");
-        show(getByCriterion(strings, new ShortStringCriterion()));
+        Criterion<String> shortCrit = new ShortStringCriterion();
+        show(getByCriterion(strings, shortCrit));
+        System.out.println("------------ not short strings ------------------");
+        show(getByCriterion(strings, Criterion.invert(shortCrit)));
 
+//        Criterion<Student> cs = s->s.length() > 3;
+//        doStuff((Weird<Student>)(s->true));
     }
 }
