@@ -1,6 +1,7 @@
 package school;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Student {
@@ -72,4 +73,13 @@ public class Student {
 //            return s.getGpa() > 3.0F;
 //        }
 //    }
+    
+    public static Comparator<Student> getGpaOrdering() {
+        return new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return Float.compare(o1.gpa, o2.gpa);
+            }
+        };
+    }
 }

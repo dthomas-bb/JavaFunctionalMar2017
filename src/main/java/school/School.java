@@ -5,8 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 
 interface StudentCriterion {
-
     boolean test(Student s);
+}
+
+interface StringCriterion {
+    boolean test(String s);
+}
+
+class ShortStringCriterion implements StringCriterion{
+
+    @Override
+    public boolean test(String s) {
+        return s.length() < 7;
+    }
+    
 }
 
 //class SmartStudentCriterion implements StudentCriterion {
@@ -22,6 +34,16 @@ public class School {
     public static List<Student> getStudentsByCriterion(List<Student> ls, StudentCriterion criterion) {
         List<Student> rv = new ArrayList<>();
         for (Student s : ls) {
+            if (criterion.test(s)) {
+                rv.add(s);
+            }
+        }
+        return rv;
+    }
+
+    public static List<String> getStringByCriterion(List<String> ls, StringCriterion criterion) {
+        List<String> rv = new ArrayList<>();
+        for (String s : ls) {
             if (criterion.test(s)) {
                 rv.add(s);
             }
@@ -53,6 +75,12 @@ public class School {
             System.out.println(s);
         }
     }
+    
+    public static void show2(List<String> ls) {
+        for (String s : ls) {
+            System.out.println(s);
+        }
+    }
 
     public static void main(String[] args) {
         List<Student> school = Arrays.asList(
@@ -75,5 +103,14 @@ public class School {
         show(getStudentsByCriterion(school, Student.getSmartnessCriterion(3.0F)));
         System.out.println("----------enthusiastic:---------");
         show(getStudentsByCriterion(school, Student.getEnthusiasmCriterion(2)));
+        System.out.println("----------order by gpa ------------");
+        school.sort(Student.getGpaOrdering());
+        show(school);
+        System.out.println("------------ all strings ------------------");
+        List<String> strings = Arrays.asList("Fred", "Jim", "Orinoco", "Aeroplane");
+        show2(strings);
+        System.out.println("------------ short strings ------------------");
+        show2(getStringByCriterion(strings, new ShortStringCriterion()));
+                
     }
 }
