@@ -38,9 +38,9 @@ public class Student {
         return "Student{" + "name=" + name + ", gpa=" + gpa + ", courses=" + courses + '}';
     }
 
-    public static StudentCriterion getSmartnessCriterion(final float threshold) {
+    public static Criterion<Student> getSmartnessCriterion(final float threshold) {
 //        float mythreshold = threshold - 0.4F;
-        return new StudentCriterion() {
+        return new Criterion<Student>() {
 
             @Override
             public boolean test(Student s) {
@@ -50,8 +50,8 @@ public class Student {
         };
     }
 
-    public static StudentCriterion getEnthusiasmCriterion(int threshold) {
-        return new StudentCriterion() {
+    public static Criterion<Student> getEnthusiasmCriterion(int threshold) {
+        return new Criterion<Student>() {
 
             @Override
             public boolean test(Student s) {

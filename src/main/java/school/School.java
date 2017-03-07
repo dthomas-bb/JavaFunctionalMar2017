@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-interface StudentCriterion {
-    boolean test(Student s);
+interface Criterion<E> {
+    boolean test(E s);
 }
 
-interface StringCriterion {
-    boolean test(String s);
-}
-
-class ShortStringCriterion implements StringCriterion{
+class ShortStringCriterion implements Criterion<String> {
 
     @Override
     public boolean test(String s) {
@@ -31,19 +27,9 @@ class ShortStringCriterion implements StringCriterion{
 
 public class School {
 
-    public static List<Student> getStudentsByCriterion(List<Student> ls, StudentCriterion criterion) {
-        List<Student> rv = new ArrayList<>();
-        for (Student s : ls) {
-            if (criterion.test(s)) {
-                rv.add(s);
-            }
-        }
-        return rv;
-    }
-
-    public static List<String> getStringByCriterion(List<String> ls, StringCriterion criterion) {
-        List<String> rv = new ArrayList<>();
-        for (String s : ls) {
+    public static <E> List<E> getStudentsByCriterion(List<E> ls, Criterion<E> criterion) {
+        List<E> rv = new ArrayList<>();
+        for (E s : ls) {
             if (criterion.test(s)) {
                 rv.add(s);
             }
