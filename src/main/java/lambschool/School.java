@@ -69,5 +69,16 @@ public class School {
 
 //        Criterion<Student> cs = s->s.length() > 3;
 //        doStuff((Weird<Student>)(s->true));
+
+        Criterion<String> firstHalf = s -> s.toUpperCase().charAt(0) <= 'M';
+        System.out.println("------------ first half strings ------------------");
+        show(getByCriterion(strings, firstHalf));
+        System.out.println("------------ short, first half strings ------------------");
+//        show(getByCriterion(strings, firstHalf.and(shortCrit)));
+        strings = getByCriterion(strings, firstHalf.and(shortCrit));
+        strings.replaceAll(s->s.toUpperCase());
+        strings.forEach(s->System.out.println(s));
+
+
     }
 }
