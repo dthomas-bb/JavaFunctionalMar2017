@@ -27,7 +27,7 @@ class ShortStringCriterion implements Criterion<String> {
 
 public class School {
 
-    public static <E> List<E> getStudentsByCriterion(List<E> ls, Criterion<E> criterion) {
+    public static <E> List<E> getByCriterion(List<E> ls, Criterion<E> criterion) {
         List<E> rv = new ArrayList<>();
         for (E s : ls) {
             if (criterion.test(s)) {
@@ -84,11 +84,11 @@ public class School {
 //        System.out.println("----------enthusiastic:---------");
 //        show(getEnthousiasticStudents(school, 3));
         System.out.println("----------very smart:---------");
-        show(getStudentsByCriterion(school, Student.getSmartnessCriterion(3.6F)));
+        show(getByCriterion(school, Student.getSmartnessCriterion(3.6F)));
         System.out.println("----------fairly smart:---------");
-        show(getStudentsByCriterion(school, Student.getSmartnessCriterion(3.0F)));
+        show(getByCriterion(school, Student.getSmartnessCriterion(3.0F)));
         System.out.println("----------enthusiastic:---------");
-        show(getStudentsByCriterion(school, Student.getEnthusiasmCriterion(2)));
+        show(getByCriterion(school, Student.getEnthusiasmCriterion(2)));
         System.out.println("----------order by gpa ------------");
         school.sort(Student.getGpaOrdering());
         show(school);
@@ -96,7 +96,7 @@ public class School {
         List<String> strings = Arrays.asList("Fred", "Jim", "Orinoco", "Aeroplane");
         show2(strings);
         System.out.println("------------ short strings ------------------");
-        show2(getStringByCriterion(strings, new ShortStringCriterion()));
+        show2(getByCriterion(strings, new ShortStringCriterion()));
                 
     }
 }
