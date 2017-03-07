@@ -56,17 +56,17 @@ public class School {
 //        }
 //        return rv;
 //    }
-    public static void show(List<Student> ls) {
-        for (Student s : ls) {
+    public static <E> void show(List<E> ls) {
+        for (E s : ls) {
             System.out.println(s);
         }
     }
     
-    public static void show2(List<String> ls) {
-        for (String s : ls) {
-            System.out.println(s);
-        }
-    }
+//    public static void show2(List<String> ls) {
+//        for (String s : ls) {
+//            System.out.println(s);
+//        }
+//    }
 
     public static void main(String[] args) {
         List<Student> school = Arrays.asList(
@@ -94,9 +94,9 @@ public class School {
         show(school);
         System.out.println("------------ all strings ------------------");
         List<String> strings = Arrays.asList("Fred", "Jim", "Orinoco", "Aeroplane");
-        show2(strings);
+        show(strings);
         System.out.println("------------ short strings ------------------");
-        show2(getByCriterion(strings, new ShortStringCriterion()));
+        show(getByCriterion(strings, new ShortStringCriterion()));
                 
     }
 }
